@@ -1,22 +1,9 @@
+import { isEmpty } from "lodash";
+
 export const dateToDay = (month, day, year, hour, minutes) => {
   const dateString = `${month} ${day}, ${year} ${hour}:${minutes}:00`;
   const date = new Date(dateString);
   return date.getDay();
-};
-
-const validateTime = (hour, minutes) => {
-  if (hour === 9 || hour === 19) {
-    return minutes > 30 ? true : false;
-  }
-  if (
-    (hour < 16 && hour > 8) ||
-    (hour < 25 && hour > 18) ||
-    (hour < 7 && hour >= 0)
-  ) {
-    return true;
-  } else {
-    return false;
-  }
 };
 
 export const validatePlate = (lastPlateNumber, day, hour, minutes) => {
@@ -46,4 +33,41 @@ export const validatePlate = (lastPlateNumber, day, hour, minutes) => {
     }
   }
   return true;
+};
+export const validateEmptyFields = (
+  day,
+  hour,
+  minutes,
+  month,
+  plateNumber,
+  year,
+  setIsAllCompleted
+) => {
+  if (
+    !isEmpty(day) &&
+    !isEmpty(hour) &&
+    !isEmpty(minutes) &&
+    !isEmpty(month) &&
+    !isEmpty(plateNumber) &&
+    !isEmpty(year)
+  ) {
+    setIsAllCompleted(true);
+  } else {
+    setIsAllCompleted(false);
+  }
+};
+
+const validateTime = (hour, minutes) => {
+  if (hour === 9 || hour === 19) {
+    return minutes > 30 ? true : false;
+  }
+  if (
+    (hour < 16 && hour > 8) ||
+    (hour < 25 && hour > 18) ||
+    (hour < 7 && hour >= 0)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 };

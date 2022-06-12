@@ -8,6 +8,7 @@ const Input = (props) => {
       className="form-control"
       placeholder={props.placeholder}
       onChange={props.onChange}
+      max="10"
     />
   );
 };
