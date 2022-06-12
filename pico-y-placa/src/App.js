@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import "./App.css";
-import InputForm from "./components/InputForm/InputForm";
+import InputForm from "./components/inputForm/InputForm";
 
 function App() {
   return (

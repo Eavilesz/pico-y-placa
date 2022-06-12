@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import Label from "../Label";
-import Input from "../Input";
 import { dateToDay, validatePlate } from "./utils";
+import Label from "../label/Label";
+import Input from "../input/Input";
+import Message from "../message/Message";
 
 const InputForm = () => {
   const [values, setValues] = useState({});
+  const [canDrive, setCanDrive] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -15,9 +18,8 @@ const InputForm = () => {
     const { day, hour, minutes, month, plateNumber, year } = values;
     const lastPlateNumber = plateNumber.charAt(plateNumber.length - 1);
     const dayOfTheWeek = dateToDay(month, day, year, hour, minutes);
-    console.log(
-      "%cCan you drive? %o",
-      "color: #c084fc ;",
+
+    setCanDrive(
       validatePlate(
         Number(lastPlateNumber),
         Number(dayOfTheWeek),
@@ -25,6 +27,7 @@ const InputForm = () => {
         Number(minutes)
       )
     );
+    setIsSubmitted(true);
   };
 
   return (
@@ -32,7 +35,7 @@ const InputForm = () => {
       className="justify-content-center d-flex container border align-items-center bg-secondary text-white"
       style={{ height: "45rem" }}
     >
-      <div>
+      <div className="border border-dark rounded p-4">
         <h1 className="mb-5">"Pico y placa" Predictor</h1>
         <form>
           <div className="row g-1 mb-4">
@@ -127,6 +130,7 @@ const InputForm = () => {
                 </button>
               </div>
             </div>
+            <Message canDrive={canDrive} isSubmitted={isSubmitted} />
           </div>
         </form>
       </div>
