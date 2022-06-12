@@ -10,6 +10,7 @@ const InputForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAllCompleted, setIsAllCompleted] = useState(false);
 
+  // This function will capture all the form input data and store it into an object contained into the "values" state
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -17,6 +18,10 @@ const InputForm = () => {
   };
   const handleSubmit = (e) => {
     const { day, hour, minutes, month, plateNumber, year } = values;
+    const lastPlateNumber = plateNumber.charAt(plateNumber.length - 1);
+    const dayOfTheWeek = dateToDay(month, day, year, hour, minutes);
+
+    //this function will validate if every field is complete
     validateEmptyFields(
       day,
       hour,
@@ -26,9 +31,7 @@ const InputForm = () => {
       year,
       setIsAllCompleted
     );
-    const lastPlateNumber = plateNumber.charAt(plateNumber.length - 1);
-    const dayOfTheWeek = dateToDay(month, day, year, hour, minutes);
-
+    //Here we set the canDrive state to either true if the car can be on the road or false if it cannot
     setCanDrive(
       validatePlate(
         Number(lastPlateNumber),
@@ -38,6 +41,7 @@ const InputForm = () => {
       )
     );
     setIsSubmitted(true);
+    return;
   };
 
   return (

@@ -1,11 +1,13 @@
 import { isEmpty } from "lodash";
 
+// this function will return the day of the week from a given date
 export const dateToDay = (month, day, year, hour, minutes) => {
   const dateString = `${month} ${day}, ${year} ${hour}:${minutes}:00`;
   const date = new Date(dateString);
   return date.getDay();
 };
 
+// in this function we validate is the given licence plate numnber can be on the road at the given time
 export const validatePlate = (lastPlateNumber, day, hour, minutes) => {
   if (day === 1) {
     if (lastPlateNumber === 1 || lastPlateNumber === 2) {
@@ -34,6 +36,7 @@ export const validatePlate = (lastPlateNumber, day, hour, minutes) => {
   }
   return true;
 };
+// in this function we validate if one or more of the form inputs have been left empty.
 export const validateEmptyFields = (
   day,
   hour,
@@ -56,7 +59,7 @@ export const validateEmptyFields = (
     setIsAllCompleted(false);
   }
 };
-
+// In this function we take the hour intervals in which every car can drive and return true if the hour and minutes inputs matches these intervals
 const validateTime = (hour, minutes) => {
   if (hour === 9 || hour === 19) {
     return minutes > 30 ? true : false;
