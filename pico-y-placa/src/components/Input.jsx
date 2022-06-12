@@ -4,8 +4,10 @@ const Input = (props) => {
   return (
     <input
       type={props.type ? props.type : "number"}
-      id={props.id}
+      name={props.name}
       className="form-control"
+      placeholder={props.placeholder}
+      onChange={props.onChange}
     />
   );
 };
